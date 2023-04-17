@@ -1,11 +1,9 @@
 import { User } from "../models/user.js"
-import  jwt  from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { sendCoockie } from "../utils/features.js";
 
 
 export const getAllUsers = async (req,res)=>{};
-
 
 
 
@@ -52,22 +50,17 @@ export const register = async (req, res) => {
 
 
 //get user data
-export const getMyProfile = async (req , res) => {
-  const { token } = req.cookies;
-  console.log( token );
-
-  if(!token){
-    return res.status(404).json({
-      success: false,
-      message: "login first",
-    });
-  }
-  const decoded = jwt.verify(token , process.env.jwtsecret);
-  const user = await User.findById( decoded._id );
-
+export const getMyProfile = (req , res) => {
   res.status(200).json({
     success : true,
-    user,
+    user : req.user,
   });
 };
 
+
+export const logout = ( req , res) => {
+  res.status(200).cookie("token" , "", {expires : new Date(Date.now())}).json({
+    success : true,
+    user : req.user,
+  });
+}
