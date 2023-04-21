@@ -1,7 +1,7 @@
 # backend_project
 
 
-This is a project i learned while learning Backend Development 
+This is a project i made while learning Backend Development 
 
 #features =>
 1) authentication feature => login ,register, logout.
